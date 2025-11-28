@@ -1,0 +1,63 @@
+2 input XOR
+.include TSMC_180nm.txt
+
+.param SUPPLY = 1.8
+.param LAMBDA = 0.09u
+.param width_P= {20*lambda}
+.param width_N= {10*lambda}
+
+.global gnd vdd
+
+Vdd vdd gnd {SUPPLY}
+Vin1  a   gnd PULSE(0 {SUPPLY} 0n 0n 0n 20n 40n)
+Vin2  b   gnd PULSE(0 {SUPPLY} 0n 0n 0n 40n 80n)
+
+.option scale=0.09u
+
+M1000 a_bar a gnd Gnd cmosn w=10 l=2
++  ad=100 pd=60 as=50 ps=30
+M1001 b a_bar vo Gnd cmosn w=10 l=2
++  ad=50 pd=30 as=100 ps=60
+M1002 a_bar a vdd vdd cmosp w=20 l=2
++  ad=100 pd=50 as=100 ps=50
+M1003 vo b a_bar Gnd cmosn w=10 l=2
++  ad=0 pd=0 as=0 ps=0
+M1004 vo b a vdd cmosp w=20 l=2
++  ad=200 pd=100 as=100 ps=50
+M1005 b a vo vdd cmosp w=20 l=2
++  ad=100 pd=50 as=0 ps=0
+C0 b a_bar 0.01fF
+C1 a_bar vdd 0.25fF
+C2 a vo 0.29fF
+C3 a gnd 0.05fF
+C4 vo a_bar 0.10fF
+C5 a a_bar 0.05fF
+C6 b vdd 0.42fF
+C7 a_bar gnd 0.10fF
+C8 b vo 0.51fF
+C9 b a 0.35fF
+C10 vo vdd 0.10fF
+C11 a vdd 0.59fF
+C12 gnd Gnd 0.04fF
+C13 a_bar Gnd 0.22fF
+C14 vo Gnd 0.08fF
+C15 a Gnd 0.28fF
+C16 b Gnd 0.06fF
+C17 vdd Gnd 0.84fF
+
+.tran 0.1n 200n
+
+.control
+set hcopypscolor=1
+set color0=white
+set color1=black
+set color2=red
+set color3=blue
+set color4=green
+set color5=orange
+run
+plot v(a)+8 v(b)+6 v(a_bar)+4 v(vo)
+.endc
+
+.end
+

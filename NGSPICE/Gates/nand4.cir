@@ -1,0 +1,56 @@
+4-I/P NAND GATE
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.global gnd vdd
+
+.param width_P= {20*lambda}
+.param width_N= {4*10*lambda}
+    
+Vdd	vdd	gnd	'SUPPLY'
+va a gnd pulse 0 1.8 3ns 0ns 0ns 20ns 40ns
+vb b gnd pulse 0 1.8 2ns 0ns 0ns 40ns 80ns
+vc c gnd pulse 0 1.8 1ns 0ns 0ns 80ns 160ns
+vd d gnd pulse 0 1.8 0ns 0ns 0ns 160ns 320ns
+
+M1 vo a vdd vdd  CMOSP   W={width_P}   L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P} AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+M2 vo b vdd vdd  CMOSP   W={width_P}   L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P} AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+M3 vo c vdd vdd  CMOSP   W={width_P}   L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P} AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+M4 vo d vdd vdd  CMOSP   W={width_P}   L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P} AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+M5 vo a n1 gnd  CMOSN   W={width_N}   L={2*LAMBDA}
++ AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+M6 n1 b n2 gnd  CMOSN   W={width_N}   L={2*LAMBDA}
++ AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+M7 n2 c n3 gnd  CMOSN   W={width_N}   L={2*LAMBDA}
++ AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+M8 n3 d gnd gnd CMOSN   W={width_N}   L={2*LAMBDA}
++ AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+.tran 0.1n 400n
+
+.control
+set hcopypscolor = 1
+set color0=white
+set color1=black
+set color2=red
+set color3=blue
+set color4=green
+set color5=magenta
+set color6=orange
+run
+plot v(a)+8 v(b)+6 v(c)+4 v(d)+2 v(vo)
+.endc
+
+.end
+

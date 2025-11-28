@@ -1,0 +1,91 @@
+6-I/P NAND GATE
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.global gnd vdd
+
+.param width_P= {20*lambda}
+.param width_N= {6*10*lambda}
+    
+Vdd	vdd	gnd	'SUPPLY'
+va a gnd pulse 0 1.8 5ns 0ns 0ns 20ns 40ns
+vb b gnd pulse 0 1.8 4ns 0ns 0ns 40ns 80ns
+vc c gnd pulse 0 1.8 3ns 0ns 0ns 80ns 160ns
+vd d gnd pulse 0 1.8 2ns 0ns 0ns 160ns 320ns
+ve e gnd pulse 0 1.8 1ns 0ns 0ns 320ns 640ns
+vf f gnd pulse 0 1.8 0ns 0ns 0ns 640ns 1280ns
+
+.option scale=0.09u
+
+M1000 vo f a_56_n31# Gnd cmosn w=60 l=2
++  ad=300 pd=130 as=360 ps=132
+M1001 vo a vdd vdd cmosp w=20 l=2
++  ad=360 pd=156 as=440 ps=204
+M1002 a_56_n47# c a_56_n55# Gnd cmosn w=60 l=2
++  ad=360 pd=132 as=360 ps=132
+M1003 a_56_n31# e a_56_n39# Gnd cmosn w=60 l=2
++  ad=0 pd=0 as=360 ps=132
+M1004 vdd f vo vdd cmosp w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+M1005 a_56_n55# b a_56_n63# Gnd cmosn w=60 l=2
++  ad=0 pd=0 as=360 ps=132
+M1006 vo c vdd vdd cmosp w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+M1007 a_56_n39# d a_56_n47# Gnd cmosn w=60 l=2
++  ad=0 pd=0 as=0 ps=0
+M1008 vo e vdd vdd cmosp w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+M1009 a_56_n63# a gnd Gnd cmosn w=60 l=2
++  ad=0 pd=0 as=300 ps=130
+M1010 vdd b vo vdd cmosp w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+M1011 vdd d vo vdd cmosp w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+
+C0 a_56_n39# vo 0.05fF
+C1 c b 0.21fF
+C2 d e 0.21fF
+C3 a_56_n39# a_56_n31# 0.62fF
+C4 c vo 0.08fF
+C5 e f 0.21fF
+C6 c vdd 0.20fF
+C7 vo d 0.08fF
+C8 vdd d 0.20fF
+C9 vo f 0.08fF
+C10 a_56_n63# a_56_n55# 0.62fF
+C11 a_56_n63# vo 0.05fF
+C12 vo e 0.08fF
+C13 a b 0.21fF
+C14 vdd f 0.20fF
+C15 a_56_n55# a_56_n47# 0.62fF
+C16 vo a_56_n47# 0.05fF
+C17 vdd e 0.20fF
+C18 vo b 0.08fF
+C19 vdd b 0.20fF
+C20 c d 0.21fF
+C21 a_56_n39# a_56_n47# 0.62fF
+C22 a_56_n55# vo 0.05fF
+C23 a vdd 0.20fF
+C24 vo vdd 1.52fF
+C25 a_56_n63# gnd 0.62fF
+C26 a_56_n31# vo 0.67fF
+
+.tran 0.1n 1400n
+
+.control
+set hcopypscolor = 1
+set color0=white
+set color1=black
+set color2=red
+set color3=blue
+set color4=green
+set color5=magenta
+set color6=cyan
+set color7=brown
+set color8=orange
+run
+plot v(a)+12 v(b)+10 v(c)+8 v(d)+6 v(e)+4 v(f)+2 v(vo)
+.endc
+
+.end
+

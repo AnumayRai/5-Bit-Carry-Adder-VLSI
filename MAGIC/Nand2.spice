@@ -1,0 +1,46 @@
+2-I/P NAND GATE
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.global gnd vdd
+
+.param width_P= {20*lambda}
+.param width_N= {2*10*lambda}
+    
+Vdd	vdd	gnd	'SUPPLY'
+va a gnd pulse 0 1.8 1ns 0ns 0ns 20ns 40ns
+vb b gnd pulse 0 1.8 0ns 0ns 0ns 40ns 80ns
+
+.option scale=0.09u
+
+M1000 vo b a_56_n22# Gnd cmosn w=20 l=2
++  ad=100 pd=50 as=120 ps=52
+M1001 a_56_n22# a gnd Gnd cmosn w=20 l=2
++  ad=0 pd=0 as=100 ps=50
+M1002 vdd b vo vdd cmosp w=20 l=2
++  ad=200 pd=100 as=120 ps=52
+M1003 vo a vdd vdd cmosp w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+C0 a vdd 0.20fF
+C1 b vdd 0.20fF
+C2 b vo 0.08fF
+C3 vo vdd 0.51fF
+C4 a_56_n22# gnd 0.21fF
+C5 vo a_56_n22# 0.26fF
+C6 b a 0.21fF
+
+
+.tran 0.1n 200n
+
+.control
+set hcopypscolor = 1
+set color0=white
+set color1=black
+set color2=red
+set color3=blue
+set color4=orange
+run
+plot v(a)+4 v(b)+2 v(vo)
+.endc
+
+.end

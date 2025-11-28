@@ -1,0 +1,30 @@
+CMOS Inverter
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.global gnd vdd
+Vdd vdd gnd 'SUPPLY'
+vin a gnd pulse 0 1.8 0ns 0ns 0ns 10ns 20ns
+.option scale=0.09u
+
+M1000 b a vdd vdd cmosp w=20 l=2
++  ad=100 pd=50 as=100 ps=50
+M1001 b a gnd Gnd cmosn w=10 l=2
++  ad=50 pd=30 as=50 ps=30
+C0 b vdd 0.25fF
+C1 gnd b 0.10fF
+C2 a b 0.05fF
+C3 a vdd 0.09fF
+C4 a gnd 0.05fF
+C5 gnd Gnd 0.04fF
+C6 b Gnd 0.07fF
+C7 a Gnd 0.14fF
+C8 vdd Gnd 0.80fF
+
+.tran 0.1n 200n
+.control
+run
+set hcopypscolor =1
+plot v(a)+2 v(b)
+.endc
+.end

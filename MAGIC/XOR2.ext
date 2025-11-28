@@ -1,0 +1,35 @@
+timestamp 1763402004
+version 8.3
+tech scmos
+style TSMC0.18um(tsmc18)from:t11b
+scale 1000 1 9
+resistclasses 6700 7500 929000 929000 1 7700 7700 80 80 80 70 70 40
+node "gnd" 21 39.1224 6 0 poc 50 30 16 16 0 0 0 0 0 0 0 0 0 0 72 44 0 0 0 0 0 0 0 0 0 0
+node "a_bar" 170 407.636 13 8 ndif 100 60 100 50 0 0 0 0 0 0 56 56 0 0 524 270 0 0 0 0 0 0 0 0 0 0
+node "vo" 126 133.187 37 46 ndif 100 60 200 100 0 0 0 0 0 0 0 0 0 0 440 228 0 0 0 0 0 0 0 0 0 0
+node "a" 363 378.922 7 21 pc 0 0 100 50 0 0 0 0 0 0 197 188 0 0 706 348 0 0 0 0 0 0 0 0 0 0
+node "b" 288 245.332 35 43 p 50 30 100 50 0 0 0 0 0 0 134 134 0 0 658 296 0 0 0 0 0 0 0 0 0 0
+node "vdd" 4059 4797.01 0 26 nw 16 16 100 50 4776 354 0 0 0 0 0 0 0 0 112 64 0 0 0 0 0 0 0 0 0 0
+cap "a" "a_bar" 54.984
+cap "a_bar" "b" 13.746
+cap "vdd" "a_bar" 249.844
+cap "a" "b" 347.423
+cap "vdd" "a" 586.116
+cap "a_bar" "vo" 103.095
+cap "a" "vo" 288.666
+cap "vdd" "b" 415.705
+cap "a_bar" "gnd" 103.095
+cap "b" "vo" 505.166
+cap "a" "gnd" 54.984
+cap "vdd" "vo" 98.3292
+fet nfet 11 8 12 9 20 24 "Gnd!" "a" 4 0 "gnd" 10 0 "a_bar" 10 0
+fet nfet 58 40 59 41 20 24 "Gnd!" "a_bar" 4 0 "vo" 10 0 "b" 10 0
+fet nfet 35 46 36 47 20 24 "Gnd!" "b" 4 0 "a_bar" 10 0 "vo" 10 0
+fet pfet 11 32 12 33 40 44 "vdd" "a" 4 0 "vdd" 20 0 "a_bar" 20 0
+fet pfet 58 69 59 70 40 44 "vdd" "a" 4 0 "vo" 20 0 "b" 20 0
+fet pfet 35 69 36 70 40 44 "vdd" "b" 4 0 "a" 20 0 "vo" 20 0
+subcap "a_bar" -187.532
+subcap "vo" -57.489
+subcap "a" -103.823
+subcap "b" -182.212
+subcap "vdd" -3953.32

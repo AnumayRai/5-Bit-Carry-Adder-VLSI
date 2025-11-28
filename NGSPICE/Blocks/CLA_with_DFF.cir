@@ -1,0 +1,115 @@
+CLA with D Flip Flop
+.include TSMC_180nm.txt
+.include dff.cir
+.include xor.cir
+.include nand2.cir
+.include nand3.cir
+.include nand4.cir
+.include nand5.cir
+.include nand6.cir
+.include notgate.cir
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.global gnd vdd
+
+    
+Vdd	vdd	gnd	'SUPPLY'
+vclk clk gnd pulse 1.8 0 2ns 0ns 0ns 45ns 90ns
+vrst rst gnd pulse 1.8 0 1ns 0ns 0ns 45ns 700ns
+
+vc0 c0 gnd 0
+va0 a0 gnd 1.8
+va1 a1 gnd 1.8
+va2 a2 gnd 0
+va3 a3 gnd 1.8
+va4 a4 gnd 1.8
+
+vb0 b0 gnd 1.8
+vb1 b1 gnd 0
+vb2 b2 gnd 0
+vb3 b3 gnd 1.8
+vb4 b4 gnd 1.8
+
+*D Flip Flop
+xdff_0 a0 clk rst q0 qb0 vdd gnd DFF
+xdff_1 a1 clk rst q1 qb1 vdd gnd DFF
+xdff_2 a2 clk rst q2 qb2 vdd gnd DFF
+xdff_3 a3 clk rst q3 qb3 vdd gnd DFF
+xdff_4 a4 clk rst q4 qb4 vdd gnd DFF
+
+xdff_5 b0 clk rst q5 qb5 vdd gnd DFF
+xdff_6 b1 clk rst q6 qb6 vdd gnd DFF
+xdff_7 b2 clk rst q7 qb7 vdd gnd DFF
+xdff_8 b3 clk rst q8 qb8 vdd gnd DFF
+xdff_9 b4 clk rst q9 qb9 vdd gnd DFF
+
+xdff_10 c0 clk rst qc0 qbc0 vdd gnd DFF
+
+*Pi and Gi Generator
+xxor_0 q0 q5 p0 vdd gnd XOR
+xxor_1 q1 q6 p1 vdd gnd XOR
+xxor_2 q2 q7 p2 vdd gnd XOR
+xxor_3 q3 q8 p3 vdd gnd XOR
+xxor_4 q4 q9 p4 vdd gnd XOR
+
+xnan_0 q0 q5 g0_bar vdd gnd NAND2
+xnan_1 q1 q6 g1_bar vdd gnd NAND2
+xnan_2 q2 q7 g2_bar vdd gnd NAND2
+xnan_3 q3 q8 g3_bar vdd gnd NAND2
+xnan_4 q4 q9 g4_bar vdd gnd NAND2
+
+xnot_0 g0_bar g0 vdd gnd inv
+xnot_1 g1_bar g1 vdd gnd inv
+xnot_2 g2_bar g2 vdd gnd inv
+xnot_3 g3_bar g3 vdd gnd inv
+xnot_4 g4_bar g4 vdd gnd inv
+
+
+*CLA(Carry Look Ahead)
+*Carry C1
+xnan_5 p0 c0 w1 vdd gnd NAND2
+xnan_6 w1 g0_bar c1 vdd gnd NAND2
+
+*Carry C2
+xnan_7 p1 g0 w2 vdd gnd NAND2
+xnan_8 p1 p0 c0 w3 vdd gnd NAND3
+xnan_9 g1_bar w2 w3 c2 vdd gnd NAND3
+
+*Carry C3
+xnan_10 p2 g1 w4 vdd gnd NAND2
+xnan_11 p2 p1 g0 w5 vdd gnd NAND3
+xnan_12 p2 p1 p0 c0 w6 vdd gnd NAND4
+xnan_13 g2_bar w4 w5 w6 c3 vdd gnd NAND4
+
+*Carry C4
+xnan_14 p3 g2 w7 vdd gnd NAND2
+xnan_15 p3 p2 g1 w8 vdd gnd NAND3
+xnan_16 p3 p2 p1 g0 w9 vdd gnd NAND4
+xnan_17 p3 p2 p1 p0 c0 w10 vdd gnd NAND5
+xnan_18 g3_bar w7 w8 w9 w10 c4 vdd gnd NAND5
+
+*CARRY Cout
+xnan_19 p4 g3 w11 vdd gnd NAND2
+xnan_20 p4 p3 g2 w12 vdd gnd NAND3
+xnan_21 p4 p3 p2 g1 w13 vdd gnd NAND4
+xnan_22 p4 p3 p2 p1 g0 w14 vdd gnd NAND5
+xnan_23 p4 p3 p2 p1 p0 c0 w15 vdd gnd NAND6
+xnan_24 g4_bar w11 w12 w13 w14 w15 cout vdd gnd NAND6
+
+.tran 0.1n 700n
+
+.control
+set hcopypscolor = 1 *White background for saving plots
+set color0=white ** color0 is used to set the background of the plot (manual sec:17.7))
+set color1=black ** color1 is used to set the grid color of the plot (manual sec:17.7))
+
+
+run
+plot v(clk)+14 v(rst)+12 v(c1)+10 v(c2)+8 v(c3)+6 v(c4)+4 v(cout)+2
+
+
+
+
+
+.endc
+.end

@@ -1,0 +1,28 @@
+CMOS Inverter
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.global gnd vdd
+Vdd vdd gnd 'SUPPLY'
+vin a gnd pulse 0 1.8 0ns 0ns 0ns 10ns 20ns
+
+.subckt inv y x vdd gnd 
+.param width_P=20*LAMBDA
+.param width_N=10*LAMBDA
+M1 y x gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++ AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+M2 y x vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P} AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+.ends inv
+
+X1 b a vdd gnd inv
+ 
+.tran 0.1n 200n
+.control
+run
+set hcopypscolor =1
+set curplottitle= Anumay_Rai-2025122013-Question_3_a
+plot v(b)+2 v(a)
+.endc
+.end
+

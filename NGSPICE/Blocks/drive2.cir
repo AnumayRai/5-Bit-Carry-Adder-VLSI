@@ -1,0 +1,31 @@
+2 input XOR
+.include TSMC_180nm.txt
+.include xor.cir
+.param SUPPLY = 1.8
+.param LAMBDA = 0.09u
+.param width_P= {20*lambda}
+.param width_N= {10*lambda}
+
+.global gnd vdd
+
+Vdd vdd gnd {SUPPLY}
+Vin1  a   gnd PULSE(0 {SUPPLY} 0n 0n 0n 20n 40n)
+Vin2  b   gnd PULSE(0 {SUPPLY} 0n 0n 0n 40n 80n)
+
+Xdut a b a_bar vo vdd gnd XOR
+
+.tran 0.1n 200n
+
+.control
+set hcopypscolor=1
+set color0=white
+set color1=black
+set color2=red
+set color3=blue
+set color4=green
+set color5=orange
+run
+plot v(a)+8 v(b)+6 v(a_bar)+4  v(vo)
+.endc
+.end
+

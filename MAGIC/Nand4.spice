@@ -1,0 +1,67 @@
+4-I/P NAND GATE
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.global gnd vdd
+
+.param width_P= {20*lambda}
+.param width_N= {4*10*lambda}
+    
+Vdd	vdd	gnd	'SUPPLY'
+va a gnd pulse 0 1.8 3ns 0ns 0ns 20ns 40ns
+vb b gnd pulse 0 1.8 2ns 0ns 0ns 40ns 80ns
+vc c gnd pulse 0 1.8 1ns 0ns 0ns 80ns 160ns
+vd d gnd pulse 0 1.8 0ns 0ns 0ns 160ns 320ns
+
+.option scale=0.09u
+
+M1000 a_56_n35# b a_56_n43# Gnd cmosn w=40 l=2
++  ad=240 pd=92 as=240 ps=92
+M1001 vo c vdd vdd cmosp w=20 l=2
++  ad=240 pd=104 as=320 ps=152
+M1002 vo d a_56_n27# Gnd cmosn w=40 l=2
++  ad=200 pd=90 as=240 ps=92
+M1003 a_56_n43# a gnd Gnd cmosn w=40 l=2
++  ad=0 pd=0 as=200 ps=90
+M1004 vdd b vo vdd cmosp w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+M1005 vdd d vo vdd cmosp w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+M1006 vo a vdd vdd cmosp w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+M1007 a_56_n27# c a_56_n35# Gnd cmosn w=40 l=2
++  ad=0 pd=0 as=0 ps=0
+C0 a vdd 0.20fF
+C1 c vdd 0.20fF
+C2 a b 0.21fF
+C3 d vdd 0.20fF
+C4 b vdd 0.20fF
+C5 c d 0.21fF
+C6 b c 0.21fF
+C7 gnd a_56_n43# 0.41fF
+C8 vo vdd 1.01fF
+C9 vo c 0.08fF
+C10 vo d 0.08fF
+C11 vo a_56_n43# 0.05fF
+C12 vo b 0.08fF
+C13 vo a_56_n27# 0.47fF
+C14 a_56_n35# a_56_n43# 0.41fF
+C15 a_56_n27# a_56_n35# 0.41fF
+C16 vo a_56_n35# 0.05fF
+
+.tran 0.1n 400n
+
+.control
+set hcopypscolor = 1
+set color0=white
+set color1=black
+set color2=red
+set color3=blue
+set color4=green
+set color5=magenta
+set color6=orange
+run
+plot v(a)+8 v(b)+6 v(c)+4 v(d)+2 v(vo)
+.endc
+
+.end
