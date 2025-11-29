@@ -1,10 +1,107 @@
 magic
 tech scmos
-timestamp 1763385314
+timestamp 1764367350
 << nwell >>
-rect 0 0 56 40
+rect 9 -68 49 -12
+<< ntransistor >>
+rect 56 -25 106 -23
+rect 56 -33 106 -31
+rect 56 -41 106 -39
+rect 56 -49 106 -47
+rect 56 -57 106 -55
+<< ptransistor >>
+rect 29 -25 43 -23
+rect 29 -33 43 -31
+rect 29 -41 43 -39
+rect 29 -49 43 -47
+rect 29 -57 43 -55
+<< ndiffusion >>
+rect 56 -23 106 -22
+rect 56 -26 106 -25
+rect 56 -31 106 -30
+rect 56 -34 106 -33
+rect 56 -39 106 -38
+rect 56 -42 106 -41
+rect 56 -47 106 -46
+rect 56 -50 106 -49
+rect 56 -55 106 -54
+rect 56 -58 106 -57
 << pdiffusion >>
-rect 10 6 50 20
+rect 29 -23 43 -22
+rect 29 -26 43 -25
+rect 29 -31 43 -30
+rect 29 -34 43 -33
+rect 29 -39 43 -38
+rect 29 -42 43 -41
+rect 29 -47 43 -46
+rect 29 -50 43 -49
+rect 29 -55 43 -54
+rect 29 -58 43 -57
+<< ndcontact >>
+rect 56 -22 106 -18
+rect 56 -30 106 -26
+rect 56 -38 106 -34
+rect 56 -46 106 -42
+rect 56 -54 106 -50
+rect 56 -62 106 -58
 << pdcontact >>
-rect 6 6 10 20
+rect 29 -22 43 -18
+rect 29 -30 43 -26
+rect 29 -38 43 -34
+rect 29 -46 43 -42
+rect 29 -54 43 -50
+rect 29 -62 43 -58
+<< psubstratepcontact >>
+rect 113 -62 117 -58
+<< nsubstratencontact >>
+rect 16 -62 20 -58
+<< polysilicon >>
+rect 6 -25 29 -23
+rect 43 -25 56 -23
+rect 106 -25 109 -23
+rect 6 -33 29 -31
+rect 43 -33 56 -31
+rect 106 -33 109 -31
+rect 6 -41 29 -39
+rect 43 -41 56 -39
+rect 106 -41 109 -39
+rect 6 -49 29 -47
+rect 43 -49 56 -47
+rect 106 -49 109 -47
+rect 6 -57 29 -55
+rect 43 -57 56 -55
+rect 106 -57 109 -55
+<< polycontact >>
+rect 2 -26 6 -22
+rect 2 -34 6 -30
+rect 2 -42 6 -38
+rect 2 -50 6 -46
+rect 2 -58 6 -54
+<< metal1 >>
+rect 49 -18 53 -9
+rect 43 -22 56 -18
+rect 0 -26 2 -22
+rect 16 -30 29 -26
+rect 0 -34 2 -30
+rect 0 -42 2 -38
+rect 16 -42 20 -30
+rect 49 -34 53 -22
+rect 43 -38 53 -34
+rect 16 -46 29 -42
+rect 0 -50 2 -46
+rect 0 -58 2 -54
+rect 16 -58 20 -46
+rect 49 -50 53 -38
+rect 43 -54 53 -50
+rect 20 -62 29 -58
+rect 106 -62 113 -58
+<< labels >>
+rlabel nsubstratencontact 16 -62 20 -58 7 vdd
+rlabel psubstratepcontact 113 -62 117 -58 7 gnd
+rlabel metal1 49 -12 53 -9 5 vo
+rlabel metal1 0 -58 2 -54 3 a
+rlabel metal1 0 -50 2 -46 3 b
+rlabel metal1 0 -42 2 -38 3 c
+rlabel metal1 0 -34 2 -30 3 d
+rlabel metal1 0 -26 2 -22 3 e
 << end >>

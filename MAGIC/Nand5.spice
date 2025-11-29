@@ -15,48 +15,30 @@ vd d gnd pulse 0 1.8 1ns 0ns 0ns 160ns 320ns
 ve e gnd pulse 0 1.8 0ns 0ns 0ns 320ns 640ns
 .option scale=0.09u
 
-M1000 a_56_n53# a gnd Gnd cmosn w=50 l=2
-+  ad=300 pd=112 as=250 ps=110
-M1001 vdd b vo vdd cmosp w=20 l=2
-+  ad=340 pd=154 as=340 ps=154
-M1002 vdd d vo vdd cmosp w=20 l=2
-+  ad=0 pd=0 as=0 ps=0
-M1003 vo a vdd vdd cmosp w=20 l=2
-+  ad=0 pd=0 as=0 ps=0
-M1004 a_56_n37# c a_56_n45# Gnd cmosn w=50 l=2
-+  ad=300 pd=112 as=300 ps=112
-M1005 vo e a_56_n29# Gnd cmosn w=50 l=2
+
+M1000 vo e a_56_n31# Gnd cmosn w=50 l=2
 +  ad=250 pd=110 as=300 ps=112
-M1006 a_56_n45# b a_56_n53# Gnd cmosn w=50 l=2
+M1001 vdd d vo vdd cmosp w=14 l=2
++  ad=238 pd=118 as=238 ps=118
+M1002 a_56_n47# b a_56_n55# Gnd cmosn w=50 l=2
++  ad=300 pd=112 as=300 ps=112
+M1003 vo a vdd vdd cmosp w=14 l=2
 +  ad=0 pd=0 as=0 ps=0
-M1007 vo c vdd vdd cmosp w=20 l=2
+M1004 a_56_n31# d a_56_n39# Gnd cmosn w=50 l=2
++  ad=0 pd=0 as=300 ps=112
+M1005 vo c vdd vdd cmosp w=14 l=2
 +  ad=0 pd=0 as=0 ps=0
-M1008 a_56_n29# d a_56_n37# Gnd cmosn w=50 l=2
+M1006 a_56_n55# a gnd Gnd cmosn w=50 l=2
++  ad=0 pd=0 as=250 ps=110
+M1007 a_56_n39# c a_56_n47# Gnd cmosn w=50 l=2
 +  ad=0 pd=0 as=0 ps=0
-M1009 vo e vdd vdd cmosp w=20 l=2
+M1008 vo e vdd vdd cmosp w=14 l=2
 +  ad=0 pd=0 as=0 ps=0
-C0 b c 0.21fF
-C1 a_56_n37# a_56_n29# 0.52fF
-C2 vdd c 0.20fF
-C3 vdd b 0.20fF
-C4 e vo 0.08fF
-C5 a_56_n37# vo 0.05fF
-C6 vo a_56_n45# 0.05fF
-C7 a b 0.21fF
-C8 e d 0.21fF
-C9 a vdd 0.20fF
-C10 vo c 0.08fF
-C11 vo b 0.08fF
-C12 vdd vo 1.26fF
-C13 vo a_56_n53# 0.05fF
-C14 d c 0.21fF
-C15 vo a_56_n29# 0.57fF
-C16 vdd d 0.20fF
-C17 gnd a_56_n53# 0.52fF
-C18 a_56_n37# a_56_n45# 0.52fF
-C19 e vdd 0.12fF
-C20 vo d 0.08fF
-C21 a_56_n45# a_56_n53# 0.52fF
+M1009 vdd b vo vdd cmosp w=14 l=2
++  ad=0 pd=0 as=0 ps=0
+
+C0 vdd Gnd 2.25fF
+
 
 .tran 0.1n 700n
 
@@ -75,3 +57,4 @@ plot v(a)+10 v(b)+8 v(c)+6 v(d)+4 v(e)+2 v(vo)
 .endc
 
 .end
+
