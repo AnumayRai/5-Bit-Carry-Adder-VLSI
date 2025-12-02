@@ -1,4 +1,4 @@
-CLA with D Flip Flop
+CLA with Sum
 .include TSMC_180nm.txt
 .include dff.cir
 .include xor.cir
@@ -14,20 +14,32 @@ CLA with D Flip Flop
 
     
 Vdd	vdd	gnd	'SUPPLY'
-vclk clk gnd pulse 1.8 0 0ns 0ns 0ns 45ns 90ns
-vc0 c0 gnd 0
-va0 a0 gnd 1.8
-va1 a1 gnd 1.8
-va2 a2 gnd 0
-va3 a3 gnd 1.8
-va4 a4 gnd 1.8
-vrst rst gnd pulse 1.8 0 0ns 0ns 0ns 30ns 700ns
+vclk clk gnd pulse 1.8 0 2ns 0ns 0ns 45ns 90ns
+vrst rst gnd pulse 1.8 0 1ns 0ns 0ns 45ns 700ns
 
-vb0 b0 gnd 1.8
-vb1 b1 gnd 0
-vb2 b2 gnd 0
-vb3 b3 gnd 1.8
-vb4 b4 gnd 1.8
+* --- Updated Inputs to Create a Transition (Replace Existing V-sources) ---
+* Initial (t=0) state is Low (0). Transitions to Target state at 50ns.
+
+* Target A = 0 1 1 0 1 (A4..A0)
+va0 a0 gnd PULSE(0 1.8 50ns 0.1ns 0.1ns 1000ns 2000ns) ; A0: 0 -> 1
+va1 a1 gnd PULSE(0 1.8 50ns 0.1ns 0.1ns 1000ns 2000ns) ; A1: 0 -> 1
+va2 a2 gnd PULSE(0 1.8 50ns 0.1ns 0.1ns 1000ns 2000ns) ; A2: 0 -> 1
+va3 a3 gnd PULSE(0 1.8 50ns 0.1ns 0.1ns 1000ns 2000ns) ; A3: 0 -> 1
+va4 a4 gnd PULSE(0 1.8 50ns 0.1ns 0.1ns 1000ns 2000ns) ; A4: 0 -> 1
+
+* Target B = 1 0 1 1 0 (B4..B0)
+vb0 b0 gnd PULSE(1.8 0 50ns 0.1ns 0.1ns 1000ns 2000ns) ; B0: 1 -> 0
+vb1 b1 gnd PULSE(0 1.8 50ns 0.1ns 0.1ns 1000ns 2000ns) ; B1: 0 -> 1
+vb2 b2 gnd PULSE(0 1.8 50ns 0.1ns 0.1ns 1000ns 2000ns) ; B2: 0 -> 1
+vb3 b3 gnd PULSE(1.8 0 50ns 0.1ns 0.1ns 1000ns 2000ns) ; B3: 1 -> 0
+vb4 b4 gnd PULSE(0 1.8 50ns 0.1ns 0.1ns 1000ns 2000ns) ; B4: 0 -> 1
+
+* Cin
+vc0 c0 gnd 0 ; Cin remains 0
+
+
+
+
 
 *D Flip Flop
 xdff_0 a0 clk rst q0 qb0 vdd gnd DFF
@@ -57,11 +69,11 @@ xnan_2 q2 q7 g2_bar vdd gnd NAND2
 xnan_3 q3 q8 g3_bar vdd gnd NAND2
 xnan_4 q4 q9 g4_bar vdd gnd NAND2
 
-xnot_0 g0 g0_bar vdd gnd inv
-xnot_1 g1 g1_bar vdd gnd inv
-xnot_2 g2 g2_bar vdd gnd inv
-xnot_3 g3 g3_bar vdd gnd inv
-xnot_4 g4 g4_bar vdd gnd inv
+xnot_0 g0_bar g0 vdd gnd inv
+xnot_1 g1_bar g1 vdd gnd inv
+xnot_2 g2_bar g2 vdd gnd inv
+xnot_3 g3_bar g3 vdd gnd inv
+xnot_4 g4_bar g4 vdd gnd inv
 
 
 *CLA(Carry Look Ahead)
@@ -95,8 +107,38 @@ xnan_22 p4 p3 p2 p1 g0 w14 vdd gnd NAND5
 xnan_23 p4 p3 p2 p1 p0 c0 w15 vdd gnd NAND6
 xnan_24 g4_bar w11 w12 w13 w14 w15 cout vdd gnd NAND6
 
-.tran 0.1n 700n
+*SUM
+xxor_5 p0 qc0 s0 vdd gnd XOR
+xxor_6 p1 c1 s1 vdd gnd XOR
+xxor_7 p2 c2 s2 vdd gnd XOR
+xxor_8 p3 c3 s3 vdd gnd XOR
+xxor_9 p4 c4 s4 vdd gnd XOR
 
+*D Flip Flop
+xdff_11 s0 clk rst qs0 qbs0 vdd gnd DFF
+xdff_12 s1 clk rst qs1 qbs1 vdd gnd DFF
+xdff_13 s2 clk rst qs2 qbs2 vdd gnd DFF
+xdff_14 s3 clk rst qs3 qbs3 vdd gnd DFF
+xdff_15 s4 clk rst qs4 qbs4 vdd gnd DFF
+xdff_16 cout clk rst qcout qbcout vdd gnd DFF
+
+.tran 0.1n 700n
+* --- Revised Measures (Place BEFORE .control) ---
+
+* 1. tcq input
+.measure tran delay_dff_in
++TRIG v(clk) VAL=0.9 RISE=2
++TARG v(q9) VAL=0.9 RISE=2
+
+* tpd
+.measure tran delay_cla_logic
++TRIG v(q0) VAL=0.9 RISE=1
++TARG v(cout) VAL=0.9 RISE=1
+
+* 3. tcq output
+.measure tran delay_outputff
++TRIG v(clk) VAL=0.9 RISE=2
++TARG v(qcout) VAL=0.9 RISE=2
 .control
 set hcopypscolor = 1 *White background for saving plots
 set color0=white ** color0 is used to set the background of the plot (manual sec:17.7))
@@ -104,7 +146,9 @@ set color1=black ** color1 is used to set the grid color of the plot (manual sec
 
 
 run
-plot v(clk)+14 v(rst)+12 v(q0)+10 v(q1)+8 v(q2)+6 v(q3)+4 v(q4)+2 v(q5) v(q6)-2 v(q7)-4 v(q8)-6 v(q9)-8 v(qc0)-10
+
+
+plot v(clk)+14 v(rst)+12 v(qs0)+10 v(qs1)+8 v(qs2)+6 v(qs3)+4 v(qs4)+2 v(qcout)
 
 
 

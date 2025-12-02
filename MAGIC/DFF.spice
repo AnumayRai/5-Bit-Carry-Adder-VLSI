@@ -80,6 +80,14 @@ C37 vdd Gnd 3.43fF
 
 .tran 0.1n 200n
 
+.measure tran SetupTime
++TRIG v(d) VAL=0.9 RISE=1
++TARG v(a) VAL=0.9 RISE=1
+
+.measure tran HoldTime
++TRIG v(a) VAL=0.9 RISE=1
++TARG v(b) VAL=0.9 RISE=1
+
 .control
 set hcopypscolor = 1 *White background for saving plots
 set color0=white ** color0 is used to set the background of the plot (manual sec:17.7))
@@ -91,4 +99,3 @@ plot v(clk)+8  v(rst)+6 v(d)+4 v(q)+2
 
 .endc
 .end
-
