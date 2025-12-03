@@ -8,9 +8,9 @@ D Flip Flop
 .param width_N= {10*lambda}
     
 Vdd	vdd	gnd	'SUPPLY'
-vclk clk gnd pulse 0 1.8 0ns 0ns 0ns 10ns 20ns
-vin d gnd pulse 0 1.8 7ns 0ns 0ns 43ns 86ns
-vrst rst gnd 1.8
+vclk clk gnd pulse 0 1.8 0ns 0ns 0ns 5ns 10ns
+vin d gnd pulse 0 1.8 2ns 0ns 0ns 20ns 40ns
+vrst rst gnd pulse 1.8 0 80ns 0ns 0ns 5ns 100ns
 .option scale=0.09u
 
 M1000 a clk a_13_6# vdd cmosp w=20 l=2
@@ -80,13 +80,17 @@ C37 vdd Gnd 3.43fF
 
 .tran 0.1n 200n
 
+.measure tran tcq
++TRIG v(d) VAL=0.9 RISE=1
++TARG v(q) VAL=0.9 RISE=1
+
 .measure tran SetupTime
 +TRIG v(d) VAL=0.9 RISE=1
-+TARG v(a) VAL=0.9 RISE=1
++TARG v(a) VAL=0.9 FALL=1
 
 .measure tran HoldTime
 +TRIG v(a) VAL=0.9 RISE=1
-+TARG v(b) VAL=0.9 RISE=1
++TARG v(b) VAL=0.9 FALL=1
 
 .control
 set hcopypscolor = 1 *White background for saving plots

@@ -52,18 +52,20 @@ M12 q qb vdd vdd  CMOSP   W={width_P}   L={2*LAMBDA}
 M13 q qb gnd gnd  CMOSN   W={width_N}   L={2*LAMBDA}
 + AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
 
-* Measuring delay from D to Q on X1
-.measure tran delay_dff TRIG v(clk) VAL=0.9 RISE=5 TARG v(q) VAL=0.9 RISE=5
+.measure tran tcq
++TRIG v(d) VAL=0.9 RISE=1
++TARG v(q) VAL=0.9 RISE=1
+
 
 .tran 0.1n 200n
 
 .measure tran SetupTime
 +TRIG v(d) VAL=0.9 RISE=1
-+TARG v(b) VAL=0.9 RISE=1
++TARG v(b) VAL=0.9 FALL=1
 
 .measure tran HoldTime
 +TRIG v(b) VAL=0.9 RISE=1
-+TARG v(d1) VAL=0.9 RISE=1
++TARG v(d1) VAL=0.9 FALL=1
 
 .control
 set hcopypscolor = 1 *White background for saving plots

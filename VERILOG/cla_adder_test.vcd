@@ -1,0 +1,393 @@
+$date
+	Wed Dec  3 05:07:47 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module cla_adder_tb $end
+$var wire 5 ! sum [4:0] $end
+$var wire 1 " cout $end
+$var reg 5 # a [4:0] $end
+$var reg 5 $ b [4:0] $end
+$var reg 1 % clk $end
+$scope module uut $end
+$var wire 5 & a [4:0] $end
+$var wire 5 ' b [4:0] $end
+$var wire 1 % clk $end
+$var wire 1 " cout $end
+$var wire 15 ( w [14:0] $end
+$var wire 5 ) sum [4:0] $end
+$var wire 5 * s [4:0] $end
+$var wire 1 + qc0 $end
+$var wire 5 , qb [4:0] $end
+$var wire 5 - qa [4:0] $end
+$var wire 5 . p [4:0] $end
+$var wire 5 / gb [4:0] $end
+$var wire 5 0 g [4:0] $end
+$var wire 5 1 c [4:0] $end
+$scope module qa0 $end
+$var wire 1 % clk $end
+$var wire 1 2 d $end
+$var wire 1 3 rst $end
+$var reg 1 4 q $end
+$upscope $end
+$scope module qa1 $end
+$var wire 1 % clk $end
+$var wire 1 5 d $end
+$var wire 1 6 rst $end
+$var reg 1 7 q $end
+$upscope $end
+$scope module qa2 $end
+$var wire 1 % clk $end
+$var wire 1 8 d $end
+$var wire 1 9 rst $end
+$var reg 1 : q $end
+$upscope $end
+$scope module qa3 $end
+$var wire 1 % clk $end
+$var wire 1 ; d $end
+$var wire 1 < rst $end
+$var reg 1 = q $end
+$upscope $end
+$scope module qa4 $end
+$var wire 1 % clk $end
+$var wire 1 > d $end
+$var wire 1 ? rst $end
+$var reg 1 @ q $end
+$upscope $end
+$scope module qb0 $end
+$var wire 1 % clk $end
+$var wire 1 A d $end
+$var wire 1 B rst $end
+$var reg 1 C q $end
+$upscope $end
+$scope module qb1 $end
+$var wire 1 % clk $end
+$var wire 1 D d $end
+$var wire 1 E rst $end
+$var reg 1 F q $end
+$upscope $end
+$scope module qb2 $end
+$var wire 1 % clk $end
+$var wire 1 G d $end
+$var wire 1 H rst $end
+$var reg 1 I q $end
+$upscope $end
+$scope module qb3 $end
+$var wire 1 % clk $end
+$var wire 1 J d $end
+$var wire 1 K rst $end
+$var reg 1 L q $end
+$upscope $end
+$scope module qb4 $end
+$var wire 1 % clk $end
+$var wire 1 M d $end
+$var wire 1 N rst $end
+$var reg 1 O q $end
+$upscope $end
+$scope module qcin $end
+$var wire 1 % clk $end
+$var wire 1 P d $end
+$var wire 1 Q rst $end
+$var reg 1 + q $end
+$upscope $end
+$scope module qsum0 $end
+$var wire 1 % clk $end
+$var wire 1 R d $end
+$var wire 1 S rst $end
+$var reg 1 T q $end
+$upscope $end
+$scope module qsum1 $end
+$var wire 1 % clk $end
+$var wire 1 U d $end
+$var wire 1 V rst $end
+$var reg 1 W q $end
+$upscope $end
+$scope module qsum2 $end
+$var wire 1 % clk $end
+$var wire 1 X d $end
+$var wire 1 Y rst $end
+$var reg 1 Z q $end
+$upscope $end
+$scope module qsum3 $end
+$var wire 1 % clk $end
+$var wire 1 [ d $end
+$var wire 1 \ rst $end
+$var reg 1 ] q $end
+$upscope $end
+$scope module qsum4 $end
+$var wire 1 % clk $end
+$var wire 1 ^ d $end
+$var wire 1 _ rst $end
+$var reg 1 ` q $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+x`
+z_
+x^
+x]
+z\
+x[
+xZ
+zY
+xX
+xW
+zV
+xU
+xT
+zS
+xR
+zQ
+0P
+xO
+zN
+0M
+xL
+zK
+0J
+xI
+zH
+0G
+xF
+zE
+0D
+xC
+zB
+0A
+x@
+z?
+0>
+x=
+z<
+0;
+x:
+z9
+08
+x7
+z6
+05
+x4
+z3
+02
+bx0 1
+bx 0
+bx /
+bx .
+bx -
+bx ,
+x+
+bx *
+bx )
+b1xxxx1xxx1xx1xx (
+b0 '
+b0 &
+0%
+b0 $
+b0 #
+x"
+bx !
+$end
+#50
+0^
+0U
+0X
+0[
+0"
+b0 1
+0R
+b0 *
+b111111111111111 (
+b0 0
+b0 .
+b11111 /
+04
+07
+0:
+0=
+b0 -
+0@
+0C
+0F
+0I
+0L
+b0 ,
+0O
+0+
+1%
+#100
+1A
+12
+0%
+b1 $
+b1 '
+b1 #
+b1 &
+#150
+1U
+b10 *
+b1 0
+b10 1
+b11110 /
+0`
+0]
+0Z
+0W
+b0 !
+b0 )
+0T
+b1 ,
+1C
+b1 -
+14
+1%
+#200
+15
+18
+1;
+1>
+0%
+b11111 #
+b11111 &
+#250
+1"
+b11110 1
+0U
+0X
+0[
+0^
+b101111011101101 (
+b0 *
+b11110 .
+17
+1:
+1=
+b11111 -
+1@
+b10 !
+b10 )
+1W
+1%
+#300
+1G
+1J
+05
+0;
+0%
+b1101 $
+b1101 '
+b10101 #
+b10101 &
+#350
+0^
+1"
+b11010 1
+0X
+1U
+b101 0
+b111011110111111 (
+b10 *
+b11010 /
+b11000 .
+b0 !
+b0 )
+0W
+1L
+b1101 ,
+1I
+0=
+b10101 -
+07
+1%
+#400
+1D
+0G
+1M
+02
+15
+08
+0>
+0%
+b11011 $
+b11011 '
+b10 #
+b10 &
+#450
+1^
+0"
+0U
+1X
+1[
+1R
+b111111111111111 (
+b11101 *
+b10 0
+b100 1
+b11001 .
+b11101 /
+04
+17
+0:
+b10 -
+0@
+1F
+0I
+b11011 ,
+1O
+b10 !
+b10 )
+1W
+1%
+#500
+1G
+12
+18
+1;
+1>
+0%
+b11111 $
+b11111 '
+b11111 #
+b11111 &
+#550
+1U
+1^
+1"
+1[
+0R
+b11110 *
+b11111 0
+b11110 1
+b0 .
+b0 /
+1`
+1]
+1Z
+0W
+b11101 !
+b11101 )
+1T
+b11111 ,
+1I
+1@
+1=
+1:
+b11111 -
+14
+1%
+#600
+0%
+#650
+0T
+b11110 !
+b11110 )
+1W
+1%
+#700
+0%
