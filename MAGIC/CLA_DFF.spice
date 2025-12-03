@@ -9,7 +9,7 @@ Vdd	vdd	gnd	'SUPPLY'
 vclk clk gnd pulse 1.8 0 2ns 0ns 0ns 45ns 90ns
 vrst rst gnd pulse 1.8 0 1ns 0ns 0ns 45ns 700ns
 
-* -------- EXAMPLE WITH Cout = 0 --------
+
 * A = 0 0 1 0 1  (a4..a0)
 va0 a0 gnd 1.8
 va1 a1 gnd 0
@@ -1592,7 +1592,7 @@ set color1=black ** color1 is used to set the grid color of the plot (manual sec
 
 
 run
-plot v(clk)+14 v(rst)+12 v(c1)+10 v(c2)+8 v(c3)+6 v(c4)+4 v(cout)+2
+plot v(clk)+14 v(rst)+12 v(c4)+8 v(c3)+6 v(c2)+4 v(c1)+2 v(cout)+10
 
 
 

@@ -17,18 +17,23 @@ Vdd	vdd	gnd	'SUPPLY'
 vclk clk gnd pulse 1.8 0 2ns 0ns 0ns 45ns 90ns
 vrst rst gnd pulse 1.8 0 1ns 0ns 0ns 45ns 700ns
 
-vc0 c0 gnd 0
-va0 a0 gnd 1.8
-va1 a1 gnd 1.8
-va2 a2 gnd 0
-va3 a3 gnd 1.8
-va4 a4 gnd 1.8
 
+* A = 0 0 1 0 1  (a4..a0)
+va0 a0 gnd 1.8
+va1 a1 gnd 0
+va2 a2 gnd 1.8
+va3 a3 gnd 0
+va4 a4 gnd 0
+
+* B = 0 1 0 0 1  (b4..b0)
 vb0 b0 gnd 1.8
 vb1 b1 gnd 0
 vb2 b2 gnd 0
-vb3 b3 gnd 1.8
-vb4 b4 gnd 1.8
+vb3 b3 gnd 0
+vb4 b4 gnd 0
+
+* Cin
+vc0 c0 gnd 0
 
 *D Flip Flop
 xdff_0 a0 clk rst q0 qb0 vdd gnd DFF
